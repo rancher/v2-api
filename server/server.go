@@ -12,34 +12,29 @@ import (
 )
 
 type Server struct {
+	DB                 *sqlx.DB
 	driver, driverName string
 }
 
 func New(driver, driverName string) (*Server, error) {
 	db, err := sqlx.Open(driver, driverName)
-	s := &Server{
+	if err != nil {
+		return nil, err
+	}
+	if err := db.Ping(); err != nil {
+		return nil, err
+	}
+
+	return &Server{
 		driver:     driver,
 		driverName: driverName,
-	}
-	db, err = s.getDb()
-	if err != nil {
-		db.Close()
-	}
-	return s, err
+		DB:         db,
+	}, err
 }
 
-func (s *Server) getDb() (*sqlx.DB, error) {
-	return sqlx.Open(s.driver, s.driverName)
-}
-
-func (s *Server) namedQuery(query string, args map[string]interface{}) (*sqlx.DB, *sqlx.Rows, error) {
-	db, err := s.getDb()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	rows, err := db.NamedQuery(query, args)
-	return db, rows, err
+func (s *Server) namedQuery(query string, args map[string]interface{}) (*sqlx.Rows, error) {
+	rows, err := s.DB.NamedQuery(query, args)
+	return rows, err
 }
 
 func (s *Server) handleError(rw http.ResponseWriter, r *http.Request, err error) {

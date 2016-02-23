@@ -20,14 +20,14 @@ func (s *Server) ServiceList(rw http.ResponseWriter, r *http.Request) error {
 func (s *Server) getService(rw http.ResponseWriter, r *http.Request, id string) error {
 	id = s.deobfuscate(r, "service", id)
 
-	db, rows, err := s.namedQuery(s.getServicesSQL(r, id), map[string]interface{}{
+	rows, err := s.namedQuery(s.getServicesSQL(r, id), map[string]interface{}{
 		"account_id": s.getAccountID(r),
 		"id":         id,
 	})
 	if err != nil {
 		return err
 	}
-	defer db.Close()
+	defer rows.Close()
 
 	response := &client.GenericCollection{
 		Collection: client.Collection{
