@@ -1,0 +1,15 @@
+import:
+- package: github.com/go-sql-driver/mysql
+  version: 1309049fd598c1faa0290fd70ab1afde2b6df0f9
+- package: github.com/gorilla/mux
+  version: 26a6070f849969ba72b72256e9f14cf519751690
+- package: github.com/gorilla/websocket
+  version: 4935ba31a2adbfcd9e08b86d2657659afbf1af9a
+- package: github.com/gorilla/context
+  version: 1c83b3eabd45b6d76072b66b746c20815fb2872d
+- package: github.com/jmoiron/sqlx
+  version: 398dd5876282499cdfd4cb8ea0f31a672abe9495
+- package: github.com/rancher/go-rancher
+  version: 4ff9e52dda4400a8e6ff1c379acfe7f607806946
+- package: github.com/Sirupsen/logrus
+  version: 57cce1ed6103dce7791881d3e69e55f90d986aa5

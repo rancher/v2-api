@@ -1,0 +1,7 @@
+./bin
+./.dapper
+./.gpath
+./dist
+./integration/.idea
+./integration/core/__pycache__
+./package/v2-api

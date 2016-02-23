@@ -1,0 +1,8 @@
+/.dapper
+/.gpath
+/bin
+/package/v2-api
+.idea
+__pycache__
+*.swp
+*.pyc
